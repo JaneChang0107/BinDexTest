@@ -70,12 +70,12 @@
           //若是答案跟quiz的對應值相同 則正確
 
           if (yourAns === ans) {
-            //$("p[class='status']").text("Correct");
-            alert("Correct");
-            location.reload();
+            $("p[class='status']").text("Correct");
+            //alert("Correct");
+            //location.reload();
           } else {
-            //$("p[class='status']").text("Incorrect");
-            alert("Incorrect");
+            $("p[class='status']").text("Incorrect");
+            //alert("Incorrect");
           }
         });
 
@@ -102,6 +102,6 @@
     <input type="text" class="yourAns" maxlength="4" />
     <div><p class="status"></p></div>
     <button type="button" class="send">送出</button>
-    <button type="button" class="refresh">重整</button>
+    <button type="button" class="refresh">下一題</button>
   </body>
 </html>
