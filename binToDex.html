@@ -51,7 +51,7 @@
 
         //顯示隨機值 dexOrBin
         var randomNumber = rendomGetDexOrGetBin(dexAndBin);
-        var quiz = $("p[class='quiz']").text(randomNumber);
+        var quiz = $("h2[class='quiz']").text(randomNumber);
 
         //quiz的對應值
         var ans;
@@ -68,15 +68,21 @@
           var yourAns = $("input:text").val();
           //比對輸入值 正確顯示正確 錯誤顯示錯誤
           //若是答案跟quiz的對應值相同 則正確
+          if(yourAns != null||yourAns!=''){
 
-          if (yourAns === ans) {
-            $("p[class='status']").text("Correct");
-            //alert("Correct");
-            //location.reload();
-          } else {
-            $("p[class='status']").text("Incorrect");
-            //alert("Incorrect");
+            $("h2[class='status correct']").removeClass("correct");
+            $("h2[class='status incorrect']").removeClass("incorrect");
+
+            if (yourAns === ans) {                      
+                      $("h2[class='status']").addClass("correct").text("Correct");
+                      //alert("Correct");
+                      //location.reload();
+                    } else {
+                      $("h2[class='status']").addClass("incorrect").text("Incorrect");
+                      //alert("Incorrect");
+                    }
           }
+
         });
 
         function rendomGetDexOrGetBin(dexAndBin) {
@@ -91,16 +97,45 @@
         });
       });
     </script>
+    <style>
+      input[class='yourAns']{
+        width: 120px;
+        height:80px;
+        border-radius: 30%;
+        font-size:  20px;
+      }
+      button[class='send'] {
+        width: 80px;
+        height:60px;
+        background-color:lightblue;
+        border:solid 1px rgb(62, 62, 173);
+        border-radius: 30%;
+      }
+      button[class='refresh']{
+        width: 80px;
+        height: 60px;
+        background-color:gray;
+        border:solid 1px rgb(39, 39, 63);
+        color:white;
+        border-radius: 30%;
+      }
+      h2[class='status correct']{
+        color:seagreen;
+      }
+      h2[class='status incorrect']{
+        color:crimson;
+      }
+    </style>
   </head>
 
   <body>
     <h2>二進制(0000~1111)跟十進制(0~15)互轉練習</h2>
     <div>
-      題目：
-      <p class="quiz"></p>
+      <h2>題目：</h2>
+      <h2 class="quiz"></h2>
     </div>
-    <input type="text" class="yourAns" maxlength="4" />
-    <div><p class="status"></p></div>
+    <input type="text" class="yourAns" maxlength="4" placeholder="YourAnswer"/>
+    <div><h2 class="status"></h2></div>
     <button type="button" class="send">送出</button>
     <button type="button" class="refresh">下一題</button>
   </body>
