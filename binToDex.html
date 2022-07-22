@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      //顯示隨機值當題目 回答對應的進制值
+
+      $(function () {
+        //陣列
+        var dexAndBin = [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "0000",
+          "0001",
+          "0010",
+          "0011",
+          "0100",
+          "0101",
+          "0110",
+          "0111",
+          "1000",
+          "1001",
+          "1010",
+          "1011",
+          "1100",
+          "1101",
+          "1110",
+          "1111",
+        ];
+
+        //顯示隨機值 dexOrBin
+        var randomNumber = rendomGetDexOrGetBin(dexAndBin);
+        var quiz = $("p[class='quiz']").text(randomNumber);
+
+        //quiz的對應值
+        var ans;
+        for (var i = 0; i < dexAndBin.length; i++) {
+          if (randomNumber == dexAndBin[i] && randomNumber.length <= 2) {
+            ans = dexAndBin[i + 16];
+          }
+          if (randomNumber == dexAndBin[i] && randomNumber.length == 4) {
+            ans = dexAndBin[i - 16];
+          }
+        }
+
+        $("button[class='send']").click(function () {
+          var yourAns = $("input:text").val();
+          //比對輸入值 正確顯示正確 錯誤顯示錯誤
+          //若是答案跟quiz的對應值相同 則正確
+
+          if (yourAns === ans) {
+            //$("p[class='status']").text("Correct");
+            alert("Correct");
+            location.reload();
+          } else {
+            //$("p[class='status']").text("Incorrect");
+            alert("Incorrect");
+          }
+        });
+
+        function rendomGetDexOrGetBin(dexAndBin) {
+          var dexAndBinLength = dexAndBin.length;
+          var randomDexandBin =
+            dexAndBin[parseInt(Math.random() * dexAndBinLength)];
+          return randomDexandBin;
+        }
+
+        $("button[class='refresh']").click(function () {
+          location.reload();
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h2>二進制(0000~1111)跟十進制(0~15)互轉練習</h2>
+    <div>
+      題目：
+      <p class="quiz"></p>
+    </div>
+    <input type="text" class="yourAns" maxlength="4" />
+    <div><p class="status"></p></div>
+    <button type="button" class="send">送出</button>
+    <button type="button" class="refresh">重整</button>
+  </body>
+</html>
